@@ -6,4 +6,4 @@ numpy
 pillow
 onnx
 onnxruntime
-pytesseract
+easyocr
