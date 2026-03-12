@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from ultralytics import YOLO
-import easyocr
+
 import cv2
 import os
 
@@ -13,7 +13,7 @@ UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 model = YOLO("best (1).onnx")
-reader = easyocr.Reader(['en'])
+
 
 @app.route("/")
 def home():
@@ -40,10 +40,7 @@ def predict():
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             plate = img[y1:y2, x1:x2]
 
-            result = reader.readtext(plate)
-
-            if len(result) > 0:
-                plate_text = result[0][1]
+            plate_text = "Plate detected"
 
     return render_template(
         "index.html",
