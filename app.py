@@ -12,7 +12,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-model = YOLO("best (1).pt")
+model = YOLO("best (1).onnx")
 
 @app.route("/")
 def home():
