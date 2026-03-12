@@ -1,7 +1,8 @@
 flask
+gunicorn
 ultralytics
 opencv-python-headless
 numpy
 pillow
-pytesseract
-gunicorn
+onnx
+onnxruntime
