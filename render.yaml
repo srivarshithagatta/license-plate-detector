@@ -12,7 +12,7 @@ services:
   - type: web
     name: license-plate-detector
     runtime: python
-    pythonVersion: 3.10
-    buildCommand: "pip install --upgrade pip && pip install --only-binary :all: -r requirements.txt"
+    pythonVersion: 3.11
+    buildCommand: "pip install --upgrade pip setuptools wheel && pip install -r requirements.txt"
     startCommand: "gunicorn app:app --timeout 120 --workers 2 --bind 0.0.0.0:$PORT"
     memoryMB: 1024
