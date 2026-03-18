@@ -14,11 +14,5 @@ services:
     runtime: python
     pythonVersion: 3.10
     buildCommand: "pip install --upgrade pip && pip install --only-binary :all: -r requirements.txt"
-    startCommand: "gunicorn app:app --timeout 120 --workers 2 --bind 0.0.0.0:$PORT"
+    startCommand: "python app.py"
     memoryMB: 1024
-    envVars:
-      - key: PORT
-        value: "10000"
-    exposedPorts:
-      - containerPort: 10000
-        protocol: tcp
