@@ -8,11 +8,20 @@
 #       - key: PYTHON_VERSION
 #         value: 3.10
 
-services:
-  - type: web
-    name: license-plate-detector
-    runtime: python
-    pythonVersion: 3.10
-    buildCommand: "pip install --upgrade pip && pip install --only-binary :all: -r requirements.txt"
-    startCommand: "python app.py"
-    memoryMB: 1024
+if __name__ == '__main__':
+    logger.info("="*60)
+    logger.info("License Plate Detector Starting")
+    logger.info("="*60)
+    
+    load_model()
+    
+    # Use PORT env var (Render sets this automatically)
+    port = int(os.getenv('PORT', '10000'))
+    logger.info(f"Starting on port {port}")
+    
+    app.run(
+        host='0.0.0.0',
+        port=port,
+        debug=False,
+        threaded=True
+    )
