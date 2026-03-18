@@ -8,9 +8,7 @@ import base64
 import os
 import logging
 import sys
-from dotenv import load_dotenv
 
-load_dotenv()
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
