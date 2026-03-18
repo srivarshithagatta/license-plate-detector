@@ -1,9 +1,8 @@
-flask
-gunicorn
-ultralytics
-opencv-python-headless
-numpy
-pillow
-onnx
-onnxruntime
-scipy
+Flask==3.0.0
+Pillow==10.1.0
+numpy==1.24.3
+onnxruntime==1.17.1
+opencv-python-headless==4.8.1.78
+Werkzeug==3.0.1
+gunicorn==21.2.0
+python-dotenv==1.0.0
