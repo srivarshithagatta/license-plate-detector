@@ -325,7 +325,10 @@ if __name__ == '__main__':
     
     load_model()
     
-    port = int(os.getenv('PORT', 10000))
+    # Use PORT env var (Render sets this automatically)
+    port = int(os.getenv('PORT', '10000'))
+    logger.info(f"Starting on port {port}")
+    
     app.run(
         host='0.0.0.0',
         port=port,
