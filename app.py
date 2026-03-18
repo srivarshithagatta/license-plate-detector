@@ -28,7 +28,7 @@ def predict():
 
     img = cv2.imread(filepath)
 
-    results = model(img, imgsz=320, device="cpu", half=False)
+    results = model(img, imgsz=640, device="cpu", half=False)
 
     plate_text = "No plate detected"
 
