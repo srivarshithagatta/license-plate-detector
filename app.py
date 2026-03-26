@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request
 from ultralytics import YOLO
-import pytesseract
+import easyocr
 import cv2
 import os
 
 # Windows path for tesseract
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
 
 app = Flask(__name__)
 
@@ -13,6 +13,7 @@ UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 model = YOLO("best (1).onnx")
+reader = easyocr.Reader(['en'])
 
 @app.route("/")
 def home():
@@ -27,7 +28,7 @@ def predict():
 
     img = cv2.imread(filepath)
 
-    results = model(img, imgsz=320, device="cpu", half=False)
+    results = model(img, imgsz=640, device="cpu", half=False)
 
     plate_text = "No plate detected"
 
@@ -39,12 +40,10 @@ def predict():
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             plate = img[y1:y2, x1:x2]
 
-            gray = cv2.cvtColor(plate, cv2.COLOR_BGR2GRAY)
+            result = reader.readtext(plate)
 
-            text = pytesseract.image_to_string(gray, config="--psm 7")
-
-            if text.strip() != "":
-                plate_text = text.strip()
+            if len(result) > 0:
+                plate_text = result[0][1]
 
     return render_template(
         "index.html",
